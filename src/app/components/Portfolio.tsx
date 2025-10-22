@@ -33,6 +33,10 @@ const Portfolio = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? "hidden" : "auto";
+    }, [isOpen]);
+
     // Smooth scroll to section
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -155,12 +159,12 @@ const Portfolio = () => {
                 }`}
             >
                 <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-                    <div className="text-lg md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <div className="md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                         Ari Marine
                     </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex text-md gap-6 md:text-xl">
+                    <div className="text-slate-300 hidden md:flex text-md gap-6 md:text-lg">
                         {["Home", "Projects", "Skills", "Contact"].map(
                             (item) => (
                                 <a
@@ -176,33 +180,33 @@ const Portfolio = () => {
 
                     {/* Mobile Hamburger */}
                     <button
-                        className="md:hidden text-white text-3xl"
+                        className="md:hidden text-3xl text-cyan-400 transition-transform duration-300 z-100 relative"
                         onClick={() => setIsOpen(!isOpen)}
                     >
                         {isOpen ? "✕" : "☰"}
                     </button>
                 </div>
-
-                {/* Mobile Slide-down Menu */}
-                {isOpen && (
-                    <div className="md:hidden bg-slate-900/95 backdrop-blur-sm shadow-lg">
-                        <div className="flex flex-col items-center gap-4 py-4 text-lg">
-                            {["Home", "Projects", "Skills", "Contact"].map(
-                                (item) => (
-                                    <a
-                                        key={item}
-                                        href={`#${item.toLowerCase()}`}
-                                        onClick={() => setIsOpen(false)}
-                                        className="hover:text-cyan-400 transition-colors duration-200"
-                                    >
-                                        {item}
-                                    </a>
-                                )
-                            )}
-                        </div>
-                    </div>
-                )}
             </nav>
+
+            {/* Full Screen Menu - OUTSIDE NAV */}
+            <div
+                className={`fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-md flex flex-col items-center justify-center gap-10 text-2xl text-cyan-400 transform transition-all duration-500 md:hidden ${
+                    isOpen
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-full pointer-events-none"
+                }`}
+            >
+                {["Home", "Projects", "Skills", "Contact"].map((item) => (
+                    <a
+                        key={item}
+                        href={`#${item.toLowerCase()}`}
+                        onClick={() => setIsOpen(false)}
+                        className="hover:text-slate-300 transition-colors duration-200"
+                    >
+                        {item}
+                    </a>
+                ))}
+            </div>
 
             {/* Hero Section */}
             <section
