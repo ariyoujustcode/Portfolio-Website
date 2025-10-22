@@ -23,6 +23,7 @@ const Portfolio = () => {
         message: "",
     });
     const [status, setStatus] = useState("idle");
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -146,7 +147,6 @@ const Portfolio = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-            {/* Navigation */}
             <nav
                 className={`fixed top-0 w-full z-50 transition-all duration-300 ${
                     isScrolled
@@ -158,7 +158,9 @@ const Portfolio = () => {
                     <div className="text-lg md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                         Ari Marine
                     </div>
-                    <div className="text-md flex gap-6 md:text-xl">
+
+                    {/* Desktop Menu */}
+                    <div className="hidden md:flex text-md gap-6 md:text-xl">
                         {["Home", "Projects", "Skills", "Contact"].map(
                             (item) => (
                                 <a
@@ -171,7 +173,35 @@ const Portfolio = () => {
                             )
                         )}
                     </div>
+
+                    {/* Mobile Hamburger */}
+                    <button
+                        className="md:hidden text-white text-3xl"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? "✕" : "☰"}
+                    </button>
                 </div>
+
+                {/* Mobile Slide-down Menu */}
+                {isOpen && (
+                    <div className="md:hidden bg-slate-900/95 backdrop-blur-sm shadow-lg">
+                        <div className="flex flex-col items-center gap-4 py-4 text-lg">
+                            {["Home", "Projects", "Skills", "Contact"].map(
+                                (item) => (
+                                    <a
+                                        key={item}
+                                        href={`#${item.toLowerCase()}`}
+                                        onClick={() => setIsOpen(false)}
+                                        className="hover:text-cyan-400 transition-colors duration-200"
+                                    >
+                                        {item}
+                                    </a>
+                                )
+                            )}
+                        </div>
+                    </div>
+                )}
             </nav>
 
             {/* Hero Section */}
