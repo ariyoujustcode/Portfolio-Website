@@ -1,7 +1,5 @@
+import Portfolio from "./components/Portfolio";
+
 export default function Home() {
-    return (
-        <div className="">
-            <main className=""></main>
-        </div>
-    );
+    return <Portfolio />;
 }
