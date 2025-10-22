@@ -155,10 +155,10 @@ const Portfolio = () => {
                 }`}
             >
                 <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-                    <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <div className="text-lg md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                         Ari Marine
                     </div>
-                    <div className="flex gap-6">
+                    <div className="text-md flex gap-6 md:text-xl">
                         {["Home", "Projects", "Skills", "Contact"].map(
                             (item) => (
                                 <a
@@ -194,13 +194,13 @@ const Portfolio = () => {
                     <div className="flex gap-4 justify-center">
                         <a
                             href="#projects"
-                            className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
+                            className="flex items-center content-center decoration-none px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
                         >
                             View My Work
                         </a>
                         <a
                             href="#contact"
-                            className="px-8 py-3 border-2 border-cyan-500 rounded-lg font-semibold hover:bg-cyan-500/10 transition-all duration-300"
+                            className="flex items-center content-center decoration-none px-8 py-3 border-2 border-cyan-500 rounded-lg font-semibold hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105"
                         >
                             Get In Touch
                         </a>
