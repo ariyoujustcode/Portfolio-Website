@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
     title: "Ari Marine Portfolio Website",
     description: "Portfolio of full-stack development work",
+    icons: {
+        icon: "/favicon.svg",
+    },
 };
 
 export default function RootLayout({
