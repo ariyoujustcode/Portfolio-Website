@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { siGithub } from "simple-icons";
 
 import emailjs from "@emailjs/browser";
 import {
-    Github,
-    Linkedin,
     Mail,
     ExternalLink,
     Code2,
@@ -13,6 +12,7 @@ import {
     Server,
     Globe,
 } from "lucide-react";
+import { SimpleIcon } from "./SimpleIcon";
 
 const Portfolio = () => {
     const [activeSection, setActiveSection] = useState("home");
@@ -31,6 +31,14 @@ const Portfolio = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Smooth scroll to section
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     const handleFormSubmission = async (
         e: React.MouseEvent<HTMLButtonElement>
@@ -62,28 +70,48 @@ const Portfolio = () => {
 
     const projects = [
         {
-            title: "E-Commerce Platform",
+            title: "Educators Thriving Meeting Scheduler",
             description:
-                "Full-stack e-commerce application with Next.js, TypeScript, Prisma, and Stripe integration. Features include product management, cart functionality, and secure checkout.",
-            tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Stripe"],
-            github: "https://github.com/yourusername/ecommerce",
-            live: "https://demo.com",
+                "Full-stack web application for managing company-wide meetings, featuring Google Calendar integration, a scheduling dashboard, and streamlined meeting management.",
+            tech: ["Next.js", "TypeScript", "Python"],
+            github: "https://github.com/ariyoujustcode/Timeslot-Seeker-Frontend",
         },
         {
-            title: "Task Management App",
+            title: "Lucidity - Y Combinator Startup Incubator App",
             description:
-                "Real-time collaborative task manager built with Next.js App Router, Server Actions, and WebSocket integration for live updates.",
-            tech: ["Next.js 14", "TypeScript", "MongoDB", "Tailwind CSS"],
-            github: "https://github.com/yourusername/taskmanager",
-            live: "https://demo.com",
+                "Frontend demo for a Y Combinator application, achieving top 10% ranking out of 27,000 applicants in the Winter 2024 batch.",
+            tech: ["Next.js", "TypeScript"],
+            github: "https://github.com/ariyoujustcode/Lucidity-Experience-PWA",
+            live: "https://lucidityintegration.vercel.app/",
         },
         {
-            title: "API Analytics Dashboard",
+            title: "NLP Experience Report Analysis",
             description:
-                "Analytics dashboard for tracking API usage metrics with real-time charts, user authentication, and role-based access control.",
-            tech: ["Next.js", "TypeScript", "Node.js", "Redis", "Recharts"],
-            github: "https://github.com/yourusername/analytics",
-            live: "https://demo.com",
+                "Data science project performing sentiment analysis and classification on synthetic experience report datasets using HuggingFace Transformers.",
+            tech: ["HuggingFace Transformers", "Python"],
+            github: "https://github.com/ariyoujustcode/NLP-Experience-Report-Analysis",
+        },
+        {
+            title: "Gambill's Barbershop",
+            description:
+                "Redesigned a local Minnesota barbershop website to improve mobile usability and streamline appointment scheduling for customers.",
+            tech: ["JavaScript"],
+            github: "https://github.com/ariyoujustcode/Barbershop-Business-Website",
+        },
+        {
+            title: "Shopple - Cart Total Calculator",
+            description:
+                "Web application with an intuitive interface that calculates your grocery cart total before checkout, helping users stay within budget.",
+            tech: ["JavaScript", "TailwindCSS"],
+            github: "https://github.com/ariyoujustcode/Shopple-Web-App",
+            live: "https://shopple-c01e5.web.app/",
+        },
+        {
+            title: "Encryption & Decryption CLI Tool",
+            description:
+                "Command-line cryptography tool for encrypting and decrypting binary or plaintext inputs, providing a simple interface for secure data handling.",
+            tech: ["Python"],
+            github: "https://github.com/ariyoujustcode/Encryption-and-Decryption-CLI-Tool",
         },
     ];
 
@@ -128,7 +156,7 @@ const Portfolio = () => {
             >
                 <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
                     <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                        YourName
+                        Ari Marine
                     </div>
                     <div className="flex gap-6">
                         {["Home", "Projects", "Skills", "Contact"].map(
@@ -177,21 +205,20 @@ const Portfolio = () => {
                             Get In Touch
                         </a>
                     </div>
-                    <div className="flex gap-6 justify-center mt-8">
+                    <div className="flex gap-6 justify-center items-center mt-8">
                         <a
-                            href="https://github.com/yourusername"
+                            href="https://github.com/ariyoujustcode"
+                            target="_blank"
                             className="hover:text-cyan-400 transition-colors"
                         >
-                            <Github className="w-6 h-6" />
+                            <SimpleIcon
+                                icon={siGithub}
+                                size={18}
+                                color={"#FFFFFF"}
+                            />
                         </a>
                         <a
-                            href="https://linkedin.com/in/yourusername"
-                            className="hover:text-cyan-400 transition-colors"
-                        >
-                            <Linkedin className="w-6 h-6" />
-                        </a>
-                        <a
-                            href="mailto:your.email@example.com"
+                            href="mailto:americanadvocate@duck.com"
                             className="hover:text-cyan-400 transition-colors"
                         >
                             <Mail className="w-6 h-6" />
@@ -236,15 +263,24 @@ const Portfolio = () => {
                                         href={project.github}
                                         className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 transition-colors"
                                     >
-                                        <Github className="w-4 h-4" /> Code
+                                        <SimpleIcon
+                                            icon={siGithub}
+                                            size={10}
+                                            color={"#FFFFFF"}
+                                        />{" "}
+                                        Code
                                     </a>
-                                    <a
-                                        href={project.live}
-                                        className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 transition-colors"
-                                    >
-                                        <ExternalLink className="w-4 h-4" />{" "}
-                                        Live Demo
-                                    </a>
+                                    {project.live && (
+                                        <a
+                                            href={project.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 transition-colors"
+                                        >
+                                            <ExternalLink className="w-4 h-4" />
+                                            Live Demo
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -395,7 +431,7 @@ const Portfolio = () => {
             {/* Footer */}
             <footer className="py-8 px-6 border-t border-slate-800 text-center text-slate-400">
                 <p>
-                    © 2025 Your Name. Built with Next.js, TypeScript, and
+                    © 2025 Ari Marine. Built with Next.js, TypeScript, and
                     Tailwind CSS.
                 </p>
             </footer>
