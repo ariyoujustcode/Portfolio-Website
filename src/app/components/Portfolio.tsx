@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+
+import emailjs from "@emailjs/browser";
 import {
     Github,
     Linkedin,
@@ -30,46 +32,29 @@ const Portfolio = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const handleFormSubmission = async (e: { preventDefault: () => void }) => {
+    const handleFormSubmission = async (
+        e: React.MouseEvent<HTMLButtonElement>
+    ) => {
         e.preventDefault();
         setStatus("loading");
 
-        // EmailJS integration - replace with your IDs
-        const serviceId = "YOUR_SERVICE_ID";
-        const templateId = "YOUR_TEMPLATE_ID";
-        const publicKey = "YOUR_PUBLIC_KEY";
-
         try {
-            const response = await fetch(
-                "https://api.emailjs.com/api/v1.0/email/send",
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
                 {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        service_id: serviceId,
-                        template_id: templateId,
-                        user_id: publicKey,
-                        template_params: {
-                            from_name: formData.name,
-                            from_email: formData.email,
-                            message: formData.message,
-                        },
-                    }),
-                }
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                },
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
             );
 
-            if (response.ok) {
-                setStatus("success");
-                setFormData({ name: "", email: "", message: "" });
-                setTimeout(() => setStatus("idle"), 3000);
-            } else {
-                setStatus("error");
-                setTimeout(() => setStatus("idle"), 3000);
-            }
+            setStatus("success");
+            setFormData({ name: "", email: "", message: "" });
+            setTimeout(() => setStatus("idle"), 3000);
         } catch (error) {
-            console.error("Error:", error);
+            console.error("EmailJS Error:", error);
             setStatus("error");
             setTimeout(() => setStatus("idle"), 3000);
         }
