@@ -75,7 +75,7 @@ const Portfolio = () => {
 
     const projects = [
         {
-            title: "Educators Thriving Meeting Scheduler",
+            title: "Company Meeting Scheduler",
             description:
                 "Full-stack web application for managing company-wide meetings, featuring Google Calendar integration, a scheduling dashboard, and streamlined meeting management.",
             tech: ["Next.js", "TypeScript", "Python"],
@@ -296,6 +296,8 @@ const Portfolio = () => {
                                     <a
                                         href={project.github}
                                         className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 transition-colors"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         <SimpleIcon
                                             icon={siGithub}
