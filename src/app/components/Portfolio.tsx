@@ -4,18 +4,10 @@ import React, { useState, useEffect } from "react";
 import { siGithub } from "simple-icons";
 
 import emailjs from "@emailjs/browser";
-import {
-    Mail,
-    ExternalLink,
-    Code2,
-    Database,
-    Server,
-    Globe,
-} from "lucide-react";
+import { Mail, Code2, Database, Server, Globe } from "lucide-react";
 import { SimpleIcon } from "./SimpleIcon";
 
 const Portfolio = () => {
-    const [activeSection, setActiveSection] = useState("home");
     const [isScrolled, setIsScrolled] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -37,16 +29,8 @@ const Portfolio = () => {
         document.body.style.overflow = isOpen ? "hidden" : "auto";
     }, [isOpen]);
 
-    // Smooth scroll to section
-    const scrollToSection = (id: string) => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
     const handleFormSubmission = async (
-        e: React.MouseEvent<HTMLButtonElement>
+        e: React.MouseEvent<HTMLButtonElement>,
     ) => {
         e.preventDefault();
         setStatus("loading");
@@ -60,7 +44,7 @@ const Portfolio = () => {
                     from_email: formData.email,
                     message: formData.message,
                 },
-                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
             );
 
             setStatus("success");
@@ -75,6 +59,13 @@ const Portfolio = () => {
 
     const projects = [
         {
+            title: "Academic Performance Predictor",
+            description:
+                "ML thesis project analyzing 10,000+ student records to predict at-risk students before term start. Trained and compared multiple models, optimizing for early intervention and strong recall.",
+            tech: ["Python", "Scikit-learn", "Pandas", "Numpy", "Matplotlib"],
+            github: "https://colab.research.google.com/drive/1dbSOsK6OuZt8_3qFSeR3aWb0VLV-3f63?usp=sharing",
+        },
+        {
             title: "Company Meeting Scheduler",
             description:
                 "Full-stack web application for managing company-wide meetings, featuring Google Calendar integration, a scheduling dashboard, and streamlined meeting management.",
@@ -82,40 +73,17 @@ const Portfolio = () => {
             github: "https://github.com/ariyoujustcode/Timeslot-Seeker-Frontend",
         },
         {
-            title: "Lucidity - Y Combinator Startup Incubator App",
-            description:
-                "Frontend demo for a Y Combinator application, achieving top 10% ranking out of 27,000 applicants in the Winter 2024 batch.",
-            tech: ["Next.js", "TypeScript"],
-            github: "https://github.com/ariyoujustcode/Lucidity-Experience-PWA",
-            live: "https://lucidityintegration.vercel.app/",
-        },
-        {
-            title: "NLP Experience Report Analysis",
-            description:
-                "Data science project performing sentiment analysis and classification on synthetic experience report datasets using HuggingFace Transformers.",
-            tech: ["HuggingFace Transformers", "Python"],
-            github: "https://github.com/ariyoujustcode/NLP-Experience-Report-Analysis",
-        },
-        {
-            title: "Gambill's Barbershop",
-            description:
-                "Redesigned a local Minnesota barbershop website to improve mobile usability and streamline appointment scheduling for customers.",
-            tech: ["JavaScript"],
-            github: "https://github.com/ariyoujustcode/Barbershop-Business-Website",
-        },
-        {
-            title: "Shopple - Cart Total Calculator",
-            description:
-                "Web application with an intuitive interface that calculates your grocery cart total before checkout, helping users stay within budget.",
-            tech: ["JavaScript", "TailwindCSS"],
-            github: "https://github.com/ariyoujustcode/Shopple-Web-App",
-            live: "https://shopple-c01e5.web.app/",
-        },
-        {
-            title: "Encryption & Decryption CLI Tool",
+            title: "CipherForge: Encryption & Decryption CLI Tool",
             description:
                 "Command-line cryptography tool for encrypting and decrypting binary or plaintext inputs, providing a simple interface for secure data handling.",
             tech: ["Python"],
+            github: "https://github.com/ariyoujustcode/Encryption-and-Decryption-CLI-Tool",
+        },
+        {
+            title: "BoardUp: Community Board Game Meetup App",
+            description:
+                "Mobile application previously published on Google Play store. Platform that connects board game enthusiasts and organizes meetup events.",
+            tech: ["Dart", "Flutter"],
             github: "https://github.com/ariyoujustcode/Encryption-and-Decryption-CLI-Tool",
         },
     ];
@@ -123,13 +91,7 @@ const Portfolio = () => {
     const skills = [
         {
             category: "Frontend",
-            items: [
-                "Next.js",
-                "React",
-                "TypeScript",
-                "Tailwind CSS",
-                "HTML/CSS",
-            ],
+            items: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
             icon: <Globe className="w-6 h-6" />,
         },
         {
@@ -144,13 +106,13 @@ const Portfolio = () => {
         },
         {
             category: "Tools",
-            items: ["Git", "Docker", "Vercel", "AWS", "Jest"],
+            items: ["Git", "Vercel", "AWS", "Jest"],
             icon: <Code2 className="w-6 h-6" />,
         },
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+        <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
             <nav
                 className={`fixed top-0 w-full z-50 transition-all duration-300 ${
                     isScrolled
@@ -159,7 +121,7 @@ const Portfolio = () => {
                 }`}
             >
                 <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-                    <div className="md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <div className="md:text-4xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                         Ari Marine
                     </div>
 
@@ -174,7 +136,7 @@ const Portfolio = () => {
                                 >
                                     {item}
                                 </a>
-                            )
+                            ),
                         )}
                     </div>
 
@@ -215,10 +177,10 @@ const Portfolio = () => {
             >
                 <div className="max-w-4xl text-center">
                     <div className="mb-6">
-                        <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
+                        <h1 className="text-6xl font-bold mb-4 bg-linear-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
                             Full Stack Developer
                         </h1>
-                        <div className="h-1 w-32 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
+                        <div className="h-1 w-32 bg-linear-to-r from-cyan-400 to-blue-500 mx-auto rounded-full"></div>
                     </div>
                     <p className="text-xl text-slate-300 mb-8 leading-relaxed">
                         Building scalable web applications with Next.js,
@@ -228,7 +190,7 @@ const Portfolio = () => {
                     <div className="flex gap-4 justify-center">
                         <a
                             href="#projects"
-                            className="flex items-center content-center decoration-none px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
+                            className="flex items-center content-center decoration-none px-8 py-3 bg-linear-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
                         >
                             View My Work
                         </a>
@@ -263,20 +225,20 @@ const Portfolio = () => {
 
             {/* Projects Section */}
             <section id="projects" className="py-20 px-6">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold mb-12 text-center">
                         Featured{" "}
-                        <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                             Projects
                         </span>
                     </h2>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8">
                         {projects.map((project, idx) => (
                             <div
                                 key={idx}
                                 className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20 hover:scale-105"
                             >
-                                <h3 className="text-xl font-bold mb-3 text-cyan-400">
+                                <h3 className="text-xl font-bold mb-3 text-cyan-400 text-center">
                                     {project.title}
                                 </h3>
                                 <p className="text-slate-300 mb-4 text-sm leading-relaxed">
@@ -306,17 +268,6 @@ const Portfolio = () => {
                                         />{" "}
                                         Code
                                     </a>
-                                    {project.live && (
-                                        <a
-                                            href={project.live}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="flex items-center gap-2 text-sm text-slate-300 hover:text-cyan-400 transition-colors"
-                                        >
-                                            <ExternalLink className="w-4 h-4" />
-                                            Live Demo
-                                        </a>
-                                    )}
                                 </div>
                             </div>
                         ))}
@@ -326,10 +277,10 @@ const Portfolio = () => {
 
             {/* Skills Section */}
             <section id="skills" className="py-20 px-6 bg-slate-900/30">
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-4xl mx-auto">
                     <h2 className="text-4xl font-bold mb-12 text-center">
                         Technical{" "}
-                        <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                             Skills
                         </span>
                     </h2>
@@ -369,7 +320,7 @@ const Portfolio = () => {
                 <div className="max-w-2xl mx-auto">
                     <h2 className="text-4xl font-bold mb-12 text-center">
                         Get In{" "}
-                        <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                        <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                             Touch
                         </span>
                     </h2>
@@ -437,15 +388,15 @@ const Portfolio = () => {
                                     !formData.email ||
                                     !formData.message
                                 }
-                                className="w-full px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full px-8 py-3 bg-linear-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 {status === "loading"
                                     ? "Sending..."
                                     : status === "success"
-                                    ? "✓ Message Sent!"
-                                    : status === "error"
-                                    ? "✗ Failed - Try Again"
-                                    : "Send Message"}
+                                      ? "✓ Message Sent!"
+                                      : status === "error"
+                                        ? "✗ Failed - Try Again"
+                                        : "Send Message"}
                             </button>
                             {status === "success" && (
                                 <p className="text-green-400 text-sm text-center">
@@ -467,7 +418,7 @@ const Portfolio = () => {
             {/* Footer */}
             <footer className="py-8 px-6 border-t border-slate-800 text-center text-slate-400">
                 <p>
-                    © 2025 Ari Marine. Built with Next.js, TypeScript, and
+                    © 2026 Ari Marine. Built with Next.js, TypeScript, and
                     Tailwind CSS.
                 </p>
             </footer>
